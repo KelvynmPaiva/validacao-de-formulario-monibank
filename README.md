@@ -11,3 +11,5 @@
 ## Tecnologias utilizadas no projeto
 * HTML
 * CSS
+
+<img src="./img/projeto.png" alt="projeto final">
