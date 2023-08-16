@@ -1,6 +1,9 @@
 export default function ehMaiorDeIdade(campo) {
   let dataDeNascimento = new Date(campo.value);
-  validaIdade(dataDeNascimento);
+
+  if (!validaIdade(dataDeNascimento)) {
+    campo.setCustomValidity("O Usuario não é maior de idade!");
+  }
 }
 
 function validaIdade(data) {

@@ -1,13 +1,8 @@
 export default function ehUmCPF(campo) {
   const cpf = campo.value.replace(/\.|-/g, "");
-  if (
-    validaNumerosRepetidos(cpf) ||
-    validaPrimeiroDigito(cpf) ||
-    validaSegundoDigito(cpf)
-  ) {
-    console.log("Esse CPF não existe");
-  } else {
-    console.log("Esse CPF existe!");
+  if (validaNumerosRepetidos(cpf) || validaPrimeiroDigito(cpf) || validaSegundoDigito(cpf)) {
+    campo.setCustomValidity("Esse CPF não válido!"); // SÓ PARA ATIVAR O SET CUSTOM ERROR, NÃO VAI APARECER ESSAS MESMA FRASE.
+
   }
 }
 
