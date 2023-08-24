@@ -3,6 +3,25 @@ import ehUmCPF from "./validaCPF.js";
 
 const camposDoFormulario = document.querySelectorAll("[required]");
 
+// LocalStorage
+const formulario = document.querySelector("[data-formulario]");
+
+formulario.addEventListener("submit", (event) => {
+  event.preventDefault();
+
+  const listaRespostas = {
+    nome: event.target.elements["nome"].value,
+    email: event.target.elements["email"].value,
+    rg: event.target.elements["rg"].value,
+    cpf: event.target.elements["cpf"].value,
+    aniversario: event.target.elements["aniversario"].value,
+  };
+
+  localStorage.setItem("cadastro", JSON.stringify(listaRespostas));
+  window.location.href = "./abrir-conta-form-2.html";
+});
+// ---- LocalStorage ----
+
 camposDoFormulario.forEach((campo) => {
   campo.addEventListener("blur", () => verificaCampo(campo));
   campo.addEventListener("invalid", (evento) => evento.preventDefault());
@@ -49,9 +68,12 @@ const mensagens = {
   },
 };
 
+// ---- Mensagens de erro ----
+
 function verificaCampo(campo) {
   let mensagem = "";
   campo.setCustomValidity("");
+
   if (campo.name == "cpf" && campo.value.length >= 11) {
     ehUmCPF(campo);
   }
@@ -60,12 +82,13 @@ function verificaCampo(campo) {
     ehMaiorDeIdade(campo);
   }
 
-  //Imprimindo mensagens de erro
+  // Imprimindo mensagens de erro
   tiposDeErro.forEach((erro) => {
     if (campo.validity[erro]) {
       mensagem = mensagens[campo.name][erro];
     }
   });
+
   const mensagemErro = campo.parentNode.querySelector(".mensagem-erro");
   const validadorDeInput = campo.checkValidity();
 
@@ -74,4 +97,5 @@ function verificaCampo(campo) {
   } else {
     mensagemErro.textContent = "";
   }
+  // ---- Imprimindo mensagens de erro ----
 }
